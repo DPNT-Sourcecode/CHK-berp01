@@ -4,4 +4,4 @@
 # friend_name = unicode string
 def hello(friend_name):
 	#print("Hello World!")
-	return "Hello, World!"
+	return "Hello, "+friend_name+"!"
