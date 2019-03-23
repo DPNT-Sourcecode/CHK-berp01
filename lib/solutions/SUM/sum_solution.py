@@ -5,4 +5,3 @@ def compute(x, y):
 	# i assume there may be some invalid inputs. 
 	# will try running and check
     #raise NotImplementedError()
-
