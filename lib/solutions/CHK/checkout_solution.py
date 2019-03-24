@@ -26,7 +26,7 @@ def checkout(skus):  # TO DO : Optimise
 
     # we actually want to keep a count of the different items
     if len(skus) == 0:
-        return -1
+        return 0
 
     prices = get_sku_lookup()
     # easier to read than count array
@@ -55,7 +55,7 @@ def checkout(skus):  # TO DO : Optimise
             total = total + (items_count[item] * prices[item])
     return total
 
-
+'''
 # tests
 if __name__ == "__main__":
     print(checkout("") == -1)
@@ -107,6 +107,8 @@ if __name__ == "__main__":
     print(checkout("BABDDCAC"))
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
+'''
+
 
 
 
