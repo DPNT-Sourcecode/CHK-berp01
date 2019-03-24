@@ -25,6 +25,8 @@ def checkout(skus):  # TO DO : Optimise
     # caluclate the value of item factoring in special offers.
 
     # we actually want to keep a count of the different items
+    if len(skus) == 0:
+        return -1
 
     prices = get_sku_lookup()
     # easier to read than count array
@@ -53,9 +55,12 @@ def checkout(skus):  # TO DO : Optimise
             total = total + (items_count[item] * prices[item])
     return total
 
-
+'''
 # tests
 if __name__ == "__main__":
     print(checkout(['A', 'A', 'A']) == 130)
     print(checkout(['A', 'A', 'A', 'a']) == -1)
     print(checkout(['A', 'A', 'A', 'B', 'B']) == 175)
+    print(checkout([]) == -1)
+    print(checkout(['A', 'F']) == -1)
+'''
