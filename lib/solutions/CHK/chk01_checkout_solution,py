@@ -42,7 +42,7 @@ def checkout(skus):  # TO DO : Optimise
     special_offers = get_special_offers()
     total = 0
     for item in set(skus):
-        if item in special_offers.keys() and items_count[item] >= special_offers[item].keys():
+        if item in special_offers.keys() and items_count[item] >= special_offers[item][0]:
             # calculate the prices for every amount of items that reach the deal.
             # if we have 7 items, and every 3 have a speial price
             # 7 / 3  = 2, so its 2* special price, then the remainder * the original price.
