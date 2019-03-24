@@ -56,13 +56,31 @@ def checkout(skus):  # TO DO : Optimise
     return total
 
 
-'''
 # tests
 if __name__ == "__main__":
-    print(checkout(['A', 'A', 'A']) == 130)
-    print(checkout(['A', 'A', 'A', 'a']) == -1)
-    print(checkout(['A', 'A', 'A', 'B', 'B']) == 175)
-    print(checkout([]) == -1)
-    print(checkout(['A', 'F']) == -1)
-'''
+    print(checkout("") == -1)
+    print(checkout("A") == 50)
+    print(checkout("B") == 30)
+    print(checkout("C") == 20)
+    print(checkout("D") == 15)
+    print(checkout("a") == -1)
+    print(checkout("-") == -1)
+    print(checkout("ABCa") == -1)
+    print(checkout("AxA") == -1)
+    print(checkout("ABCD") == 115)
+    print(checkout("A") == 50)
+    print(checkout("AA") == 100)
+    print(checkout("AAA") == 130)
+    print(checkout("AAAA") == 180)
+    print(checkout("AAAAA") == 230)
+    print(checkout("AAAAAA") == 260)
+    print(checkout("B") == 30)
+    print(checkout("BB") == 45)
+    print(checkout("BBB") == 75)
+    print(checkout("BBBB") == 90)
+    print(checkout("ABCDABCD") == 215)
+    print(checkout("BABDDCAC") == 215)
+    print(checkout("AAABB") == 175)
+    print(checkout("ABCDCBAABCABBAAA") == 505)
+
 
