@@ -55,6 +55,7 @@ def checkout(skus):  # TO DO : Optimise
             total = total + (items_count[item] * prices[item])
     return total
 
+
 '''
 # tests
 if __name__ == "__main__":
@@ -64,3 +65,4 @@ if __name__ == "__main__":
     print(checkout([]) == -1)
     print(checkout(['A', 'F']) == -1)
 '''
+
