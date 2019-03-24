@@ -6,13 +6,13 @@ def get_sku_lookup():  # normally would have to query a database or something, w
 	return sku_lookup;
 
 
-def special_offers():
+def get_special_offers():
 
 	# quickly work out the differencs of things.
 	#
 	# special_offers = {'A':{3: -20}, {'B':{2, -15}}} # for every  {x:{y:z}} for every y of x add z
 	# special_offers = {'A':{3: 130}, {'B':{2, 45}}} // for every  {x:{y:z}} for every y of x add z
-	special_offers = {'A': [3: 130], {'B': [2, 45]}} // for every  {x: {y: z}} for every y of x add z
+	special_offers = {'A': [3, 130], 'B': [2, 45]}
 	return special_offers
 
 # noinspection PyUnusedLocal
@@ -37,14 +37,19 @@ def checkout(skus):  # TO DO : Optimise
 		items_count[item] = items_count[item] + 1;
 
 	total = 0
-	for item in Set(skus):
+	for item in set(skus):
 		if item in special_offers().keys() and items_count[item] >= special_offers()[item][0]:
 			# calculate the prices for every amount of items that reach the deal.
 			# if we have 7 items, and every 3 have a speial price
 			# 7 / 3  = 2, so its 2* special price, then the remainder * the original price.
-			total = total + (special_offers[item][1] * int(items_count[item]/special_offers[item][0]0))
-			total = total + ((items_count[item] % special_offers[item][0]) * prices[item]
-		else
+			total = total + (special_offers[item][1] * int(items_count[item]/special_offers[item][0]))
+			total = total + ((items_count[item] % special_offers[item][0]) * prices[item])
+		else:
 			total=total + (items_count[item] * prices[item])
 	return total;
+
+# tests
+if __name__ == "__main__":
+	print(checkout(['A','A','A']))
+	
 
