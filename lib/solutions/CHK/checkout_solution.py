@@ -27,6 +27,23 @@ def get_special_offers():
     special_offers = {'A': [3, 130], 'B': [2, 45]}
     return special_offers
 
+def process_special_offers(basket):
+	''' process the special offers based on prices, should be performed after buy_x_get_x_free'''
+	total = 0;
+	sku_prices = get_sku_lookup()
+	special_offers = get_special_offers()
+	for item in basket.keys():
+		if item in special_offers:
+			required_count = special_offer[item][0]
+			special_offer_price = special_offer[item][1]
+			if basket[item] >= required_count:
+				# we have enough for as special offer
+				offer_count = basket[item] / required_count
+				basket[item] = basket[item] - (required_count * offer_count)
+				total = total + (special_offer_price * offer_count)
+	return basket, total
+	
+	
 # noinspection PyUnusedLocal
 # skus = unicode string
 
@@ -93,7 +110,7 @@ def checkout(skus):  # TO DO : Optimise
 	
 	#  more functional approach
 	basket, total = buy_x_get_x_free(basket);
-	
+	baslet = process_special_offers
 	
 	
     special_offers = get_special_offers()
@@ -165,3 +182,4 @@ if __name__ == "__main__":
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
 '''
+
