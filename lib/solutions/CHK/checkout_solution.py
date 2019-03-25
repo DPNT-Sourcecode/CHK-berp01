@@ -49,6 +49,19 @@ def buy_x_get_x_free(basket):
 
 	return basket, total
 
+def get_total_for_elements_in_basket(basket):
+	
+	total = 0
+	prices = get_sku_lookup()
+	for sku in basket.keys():
+		item_count = basket[sku]
+		if sku in prices.keys():
+			total = total + (item_count * prices[key])
+			 basket.pop(sku)
+	return total, basket; # basket should be empty
+		
+		
+
 def checkout(skus):  # TO DO : Optimise
     'supermarket checkout caluclator, returns cost of items skus'
     # illegal input return -1
@@ -138,5 +151,6 @@ if __name__ == "__main__":
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
 '''
+
 
 
