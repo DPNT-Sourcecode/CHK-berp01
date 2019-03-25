@@ -8,12 +8,15 @@ def get_sku_lookup():  # normally would have to query a database or something, w
 def get_basket(sku_string):
 	''' convert a string of SKU_values to a dict item:count '''
 	
+	# all the valid items, this would be some kind of database is valid sku lookup function
+	# 
 	items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
 	for item in skus:
         #item = upper(item)
         if item not in items_count.keys():
-            return -1
+            return None# not a valid sku, return
         items_count[item] = items_count[item] + 1
+	return item_count
 	
 def get_special_offers():
 
@@ -83,17 +86,16 @@ def checkout(skus):  # TO DO : Optimise
     if len(skus) == 0:
         return 0
 
-    prices = get_sku_lookup()
-    # easier to read than count array
-    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
-    basket = {}
-
-    for item in skus:
-        #item = upper(item)
-        if item not in items_count.keys():
-            return -1
-        items_count[item] = items_count[item] + 1
-
+    basket = get_basket()
+	if basket == None:
+		# invalid sku in skus
+		return -1
+	
+	#  more functional approach
+	basket, total = buy_x_get_x_free(basket);
+	
+	
+	
     special_offers = get_special_offers()
     total = 0
     for item in set(skus):
@@ -163,7 +165,3 @@ if __name__ == "__main__":
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
 '''
-
-
-
-
