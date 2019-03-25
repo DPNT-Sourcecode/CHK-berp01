@@ -112,10 +112,13 @@ def checkout(skus):  # TO DO : Optimise
         # invalid sku in skus
         return -1
 
+    print(basket)
     #  more functional approach
     basket, total = buy_x_get_x_free(basket)
+    print(basket, 'total  = ', total)
     basket, special_offer_total = process_special_offers(basket)
     total = total + special_offer_total
+    print(basket, total)
 
     sku_prices = get_sku_lookup()
     for item in basket.keys():
@@ -140,7 +143,9 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    print(checkout("EEEEBB"))# 160, got: 190
+    print(checkout("BEBEEE"))# 160, got: 190
     # print(checkout("EE"))  # 40
     # print(checkout("EEB")) # expected: 80, got: 40
     # print(checkout("ABCDEABCDE"))  # expected: 280, got: 210
@@ -189,6 +194,7 @@ def checkout(skus):  # TO DO : Optimise
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
 
