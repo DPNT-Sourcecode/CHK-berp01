@@ -25,7 +25,7 @@ def get_special_offers():
     #
     # special_offers = {'A':{3: -20}, {'B':{2, -15}}} # for every  {x:{y:z}} for every y of x add z
     # special_offers = {'A':{3: 130}, {'B':{2, 45}}} // for every  {x:{y:z}} for every y of x add z
-    special_offers = {'A': [3, 130], 'B': [2, 45]}
+    special_offers = {'A': {3:130, 5:200}, 'B': {2, 45}}
     return special_offers
 
 
@@ -35,9 +35,10 @@ def process_special_offers(basket):
     special_offers = get_special_offers()
     for item in basket.keys():
         if item in special_offers:
+            item_count = basket[item]
             required_count = special_offers[item][0]
             special_offer_price = special_offers[item][1]
-            if basket[item] >= required_count:
+            if item_count >= required_count:
                 # we have enough for as special offer
                 offer_count = int(basket[item] / required_count)
                 basket[item] = basket[item] - (required_count * offer_count)
@@ -183,5 +184,6 @@ if __name__ == "__main__":
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
