@@ -1,23 +1,22 @@
 
 
-def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
-    ''' get a dict of all the {skus:prices}'''
-    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F':10}
-    return sku_lookup
-
-
 def get_basket(sku_string):
     ''' convert a string of SKU_values to a dict item:count '''
 
     # all the valid items, this would be some kind of database is valid sku lookup function
     #
-    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
+    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F':0}
     for item in sku_string:
         if item not in items_count.keys():
             return None  # not a valid sku, return
         items_count[item] = items_count[item] + 1
     return items_count
 
+
+def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
+    ''' get a dict of all the {skus:prices}'''
+    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F':10}
+    return sku_lookup
 
 def get_special_offers():
 
@@ -66,10 +65,12 @@ def buy_x_get_x_free(basket):
 
                 # add the value of the purchases special offer items
                 total = get_sku_lookup()[
-                    key] * (required_for_offer_count*number_of_offers)
+                    key] * (required_for_offer_count)
 
                 # save on a modulo.
-                basket[key] = basket_count - (required_for_offer_count)
+                basket_count = basket_count - required_for_offer_count
+                
+                basket[key] = basket_count
                 free_item_key = special_offers[key][1][0]
                 free_item_count = special_offers[key][1][1]
 
@@ -78,6 +79,7 @@ def buy_x_get_x_free(basket):
                     basket[free_item_key] = max(
                         0, ( basket[free_item_key]-free_item_count))
 
+                basket[key] = basket_count
     return basket, total
 
 
@@ -136,7 +138,8 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-#if __name__ == "__main__":
+if __name__ == "__main__":
+	print(checkout("FFF")) # = 20
     #print(checkout("EEEEBB"))# 160, got: 190
     #print(checkout("BEBEEE"))# 160, got: 190
     # print(checkout("EE"))  # 40
@@ -187,5 +190,6 @@ def checkout(skus):  # TO DO : Optimise
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
