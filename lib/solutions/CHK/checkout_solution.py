@@ -61,11 +61,10 @@ def buy_x_get_x_free(basket):
             basket_count = basket[key]
 
             while required_for_offer_count <= basket_count :
-                print(basket)
                 #number_of_offers = int(basket_count/ required_for_offer_count)
 
                 # add the value of the purchases special offer items
-                total = get_sku_lookup()[
+                total = total + get_sku_lookup()[
                     key] * (required_for_offer_count)
 
                 # save on a modulo.
@@ -110,9 +109,7 @@ def checkout(skus):  # TO DO : Optimise
         return -1
 
     #  more functional approach
-    print(basket)
     basket, total = buy_x_get_x_free(basket)
-    print(basket, total)
     basket, special_offer_total = process_special_offers(basket)
     total = total + special_offer_total
 
@@ -139,11 +136,11 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #print(checkout("FFF")) # = 20
     #print(checkout("FFFF")) # = 30
-    print(checkout("FFFFF")) # = 40
-    print(checkout("FFFFFF")) # = 40
+    #print(checkout("FFFFF")) # = 40
+    #print(checkout("FFFFFF")) # = 40
     #print(checkout("EEEEBB"))# 160, got: 190
     #print(checkout("BEBEEE"))# 160, got: 190
     # print(checkout("EE"))  # 40
@@ -194,8 +191,3 @@ if __name__ == "__main__":
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
-
-
-
-
-
