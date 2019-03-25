@@ -2,7 +2,7 @@
 
 def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
     ''' get a dict of all the {skus:prices}'''
-    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
+    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F':10}
     return sku_lookup
 
 
@@ -54,27 +54,24 @@ def buy_x_get_x_free(basket):
                     return modified dict, current basket total
     '''
     total = 0
-    special_offers = {'E': [2, ['B', 1]]}  # for every '2' 'E' get 1 'B'
+    special_offers = {'E': [2, ['B', 1]], 'F':[2,['F',1]]}  # for every '2' 'E' get 1 'B'
     for key in special_offers.keys():
         if key in basket:
             # we have a special offer item to process;
             required_for_offer_count = special_offers[key][0]
             basket_count = basket[key]
 
-            if required_for_offer_count <= basket_count:  # does it reach the requirement
-                # how many
-
-                number_of_offers = int(basket_count/ required_for_offer_count)
+            while required_for_offer_count <= basket_count :
+                #number_of_offers = int(basket_count/ required_for_offer_count)
 
                 # add the value of the purchases special offer items
                 total = get_sku_lookup()[
                     key] * (required_for_offer_count*number_of_offers)
 
                 # save on a modulo.
-                basket[key] = basket_count - \
-                    (number_of_offers*required_for_offer_count)
+                basket[key] = basket_count - (required_for_offer_count)
                 free_item_key = special_offers[key][1][0]
-                free_item_count = special_offers[key][1][1]  * number_of_offers
+                free_item_count = special_offers[key][1][1]
 
                 # take free_item_count free_item_keys from basket.
                 if free_item_key in basket:
@@ -190,4 +187,5 @@ def checkout(skus):  # TO DO : Optimise
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
