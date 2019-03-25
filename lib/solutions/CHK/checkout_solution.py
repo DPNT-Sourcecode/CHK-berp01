@@ -13,10 +13,9 @@ def get_basket(sku_string):
     #
     items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
     for item in skus:
-        # item = upper(item)
-    if item not in items_count.keys():
-        return None  # not a valid sku, return
-    items_count[item] = items_count[item] + 1
+        if item not in items_count.keys():
+            return None  # not a valid sku, return
+        items_count[item] = items_count[item] + 1
     return item_count
 
 
@@ -53,7 +52,7 @@ def buy_x_get_x_free(basket):
     '''
     total = 0
     special_offers = {'E': [2, ['B', 1]]}  # for every '2' 'E' get 1 'B'
-    for key special_offers.keys():
+    for key  in special_offers.keys():
         if key in basket:
             # we have a special offer item to process;
             required_for_offer_count = special_offers[key][0]
@@ -188,5 +187,6 @@ if __name__ == "__main__":
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
 '''
+
 
 
