@@ -39,7 +39,7 @@ def process_special_offers(basket):
             special_offer_price = special_offers[item][1]
             if basket[item] >= required_count:
                 # we have enough for as special offer
-                offer_count = basket[item] / required_count
+                offer_count = int(basket[item] / required_count)
                 basket[item] = basket[item] - (required_count * offer_count)
                 total = total + (special_offer_price * offer_count)
     return basket, total
@@ -60,7 +60,7 @@ def buy_x_get_x_free(basket):
 
             if required_for_offer_count <= basket_count:  # does it reach the requirement
                 # how many
-                number_of_offers = required_for_offer_count / basket_count
+                number_of_offers = int(required_for_offer_count / basket_count)
 
                 # add the value of the purchases special offer items
                 total = get_sku_lookup()[key] * number_of_offers
@@ -138,57 +138,49 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-#if __name__ == "__main__":
-    #print(checkout("") == 0)
-    #print(checkout("A") == 50)
-    '''print(checkout("B") == 30)
-    print(checkout("C") == 20)
-    print(checkout("D") == 15)
-    print(checkout("a") == -1)
-    print(checkout("-") == -1)
-    print(checkout("ABCa") == -1)
-    print(checkout("AxA") == -1)
-    print(checkout("ABCD") == 115)
-    print(checkout("A") == 50)
-    print(checkout("AA") == 100)
-    print(checkout("AAA") == 130)
-    print(checkout("AAAA") == 180)
-    print(checkout("AAAAA") == 230)
-    print(checkout("AAAAAA") == 260)
-    print(checkout("B") == 30)
-    print(checkout("BB") == 45)
-    print(checkout("BBB") == 75)
-    print(checkout("BBBB") == 90)
-    print(checkout("ABCDABCD") == 215)
-    print(checkout("BABDDCAC") == 215)
-    print(checkout("AAABB") == 175)
-    print(checkout("ABCDCBAABCABBAAA") == 505)
-    '''
-    #
-    #print(checkout(""))
-    #print(checkout("A"))
-    # print(checkout("B"))
-    # print(checkout("C"))
-    # print(checkout("D"))
-    # print(checkout("a"))
-    # print(checkout("-"))
-    # print(checkout("ABCa"))
-    # print(checkout("AxA"))
-    # print(checkout("ABCD"))
-    # print(checkout("A"))
-    # print(checkout("AA"))
-    # print(checkout("AAA"))
-    # print(checkout("AAAA"))
-    # print(checkout("AAAAA"))
-    # print(checkout("AAAAAA"))
-    # print(checkout("B"))
-    # print(checkout("BB"))
-    # print(checkout("BBB"))
-    # print(checkout("BBBB"))
-    # print(checkout("ABCDABCD"))
-    # print(checkout("BABDDCAC"))
-    # print(checkout("AAABB"))
-    # print(checkout("ABCDCBAABCABBAAA"))
+if __name__ == "__main__":
+    print( checkout("AAAAA") )
+    # print( checkout("") == 0)
+    # print( checkout("A") == 50)
+    # print( checkout("B") == 30)
+    # print( checkout("C") == 20)
+    # print( checkout("D") == 15)
+    # print( checkout("E") == -1)
+    # print( checkout("a") == -1)
+    # print( checkout("-") == -1)
+    # print( checkout("ABCa") == -1)
+    # print( checkout("AxA") == -1)
+    # print( checkout("ABCDE") == -1)
+    # print( checkout("A") == 50)
+    # print( checkout("AA") == 100)
+    # print( checkout("AAA") == 130.0)
+    # print( checkout("AAAA") == 173.33333333333331)
+    # print( checkout("AAAAA") == 216.66666666666669)
+    # print( checkout("AAAAAA") == 260.0)
+    # print( checkout("AAAAAAA") == 303.33333333333337)
+    # print( checkout("AAAAAAAA") == 346.66666666666663)
+    # print( checkout("AAAAAAAAA") == 390.0)
+    # print( checkout("AAAAAAAAAA") == 433.33333333333337)
+    # print( checkout("EE") == -1)
+    # print( checkout("EEB") == -1)
+    # print( checkout("EEEB") == -1)
+    # print( checkout("EEEEBB") == -1)
+    # print( checkout("BEBEEE") == -1)
+    # print( checkout("A") == 50)
+    # print( checkout("AA") == 100)
+    # print( checkout("AAA") == 130.0)
+    # print( checkout("AAAA") == 173.33333333333331)
+    # print( checkout("AAAAA") == 216.66666666666669)
+    # print( checkout("AAAAAA") == 260.0)
+    # print( checkout("B") == 30)
+    # print( checkout("BB") == 45.0)
+    # print( checkout("BBB") == 67.5)
+    # print( checkout("BBBB") == 90.0)
+    # print( checkout("ABCDEABCDE") == -1)
+    # print( checkout("CCADDEEBBA") == -1)
+    # print( checkout("AAAAAEEBAAABB") == -1)
+    # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
 
