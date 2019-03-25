@@ -2,7 +2,7 @@
 
 def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
     ''' get a dict of all the {skus:prices}'''
-    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15}
+    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E':40}
     return sku_lookup
 
 
@@ -11,7 +11,7 @@ def get_basket(sku_string):
 
     # all the valid items, this would be some kind of database is valid sku lookup function
     #
-    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
+    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E':0}
     for item in sku_string:
         if item not in items_count.keys():
             return None  # not a valid sku, return
@@ -138,7 +138,10 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-#if __name__ == "__main__":
+if __name__ == "__main__":
+	print( checkout("E")) # 40
+	print( checkout("ABCDE")) # 155
+	print( checkout("AAAAA")) # 200
     #print( checkout("AAAAA") )
     # print( checkout("") == 0)
     # print( checkout("A") == 50)
@@ -180,4 +183,5 @@ def checkout(skus):  # TO DO : Optimise
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
