@@ -37,12 +37,11 @@ def process_special_offers(basket):
         if item in special_offers:
             item_count = basket[item]
             for special_offer_item_count in special_offers[item]:
-                print(special_offer_item_count)
                 special_offer_price = special_offers[item][special_offer_item_count]
                 if item_count >= special_offer_item_count:
                     # we have enough for as special offer
                     offer_count = int(
-                        floor(basket[item] / special_offer_item_count))
+                        basket[item] / special_offer_item_count)
                     basket[item] = basket[item] - \
                         (special_offer_item_count * offer_count)
                     total = total + (special_offer_price * offer_count)
@@ -139,10 +138,12 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-if __name__ == "__main__":
-    print(checkout("E"))  # 40
-    print(checkout("ABCDE"))  # 155
-    print(checkout("AAAAA"))  # 200
+# if __name__ == "__main__":
+    # print(checkout("E"))  # 40
+    # print(checkout("ABCDE"))  # 155
+    # print(checkout("AAAAA"))  # 200
+    # print(checkout("AAAAAA"))  # 260
+    # print(checkout("AAAAAAA"))  # 300
     #print( checkout("AAAAA") )
     # print( checkout("") == 0)
     # print( checkout("A") == 50)
@@ -184,6 +185,7 @@ if __name__ == "__main__":
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
 
