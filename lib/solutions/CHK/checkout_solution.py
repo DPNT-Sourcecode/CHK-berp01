@@ -5,7 +5,16 @@ def get_sku_lookup():  # normally would have to query a database or something, w
     sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15}
     return sku_lookup
 
-
+def get_basket(sku_string):
+	''' convert a string of SKU_values to a dict item:count '''
+	
+	items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
+	for item in skus:
+        #item = upper(item)
+        if item not in items_count.keys():
+            return -1
+        items_count[item] = items_count[item] + 1
+	
 def get_special_offers():
 
     # quickly work out the differencs of things.
@@ -17,6 +26,8 @@ def get_special_offers():
 
 # noinspection PyUnusedLocal
 # skus = unicode string
+
+
 
 def buy_x_get_x_free(basket):
 	''' take care of by X of item Y get Z of W free
@@ -51,6 +62,7 @@ def buy_x_get_x_free(basket):
 
 def get_total_for_elements_in_basket(basket):
 	
+	# should be able to use an accumulate style algorithm for this. 
 	total = 0
 	prices = get_sku_lookup()
 	for sku in basket.keys():
@@ -151,6 +163,7 @@ if __name__ == "__main__":
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
 '''
+
 
 
 
