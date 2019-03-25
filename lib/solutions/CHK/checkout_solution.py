@@ -109,13 +109,18 @@ def checkout(skus):  # TO DO : Optimise
 
     #  more functional approach
     basket, total = buy_x_get_x_free(basket)
+    print(basket, total)
     basket, special_offer_total = process_special_offers(basket)
     total = total + special_offer_total
+    print(basket, total)
 
     sku_prices = get_sku_lookup()
     for item in basket.keys():
-        total += sku_prices[item]
+        print(total, sku_prices[item])
+        total = total + (sku_prices[item] * basket[item])
+    print(basket, total)
     return total
+    
 
     # special_offers = get_special_offers()
     # total = 0
@@ -137,9 +142,9 @@ def checkout(skus):  # TO DO : Optimise
 
 # tests
 if __name__ == "__main__":
-    print(checkout("") == 0)
+    #print(checkout("") == 0)
     print(checkout("A") == 50)
-    print(checkout("B") == 30)
+    '''print(checkout("B") == 30)
     print(checkout("C") == 20)
     print(checkout("D") == 15)
     print(checkout("a") == -1)
@@ -161,31 +166,33 @@ if __name__ == "__main__":
     print(checkout("BABDDCAC") == 215)
     print(checkout("AAABB") == 175)
     print(checkout("ABCDCBAABCABBAAA") == 505)
+    '''
     #
-    print(checkout(""))
+    #print(checkout(""))
     print(checkout("A"))
-    print(checkout("B"))
-    print(checkout("C"))
-    print(checkout("D"))
-    print(checkout("a"))
-    print(checkout("-"))
-    print(checkout("ABCa"))
-    print(checkout("AxA"))
-    print(checkout("ABCD"))
-    print(checkout("A"))
-    print(checkout("AA"))
-    print(checkout("AAA"))
-    print(checkout("AAAA"))
-    print(checkout("AAAAA"))
-    print(checkout("AAAAAA"))
-    print(checkout("B"))
-    print(checkout("BB"))
-    print(checkout("BBB"))
-    print(checkout("BBBB"))
-    print(checkout("ABCDABCD"))
-    print(checkout("BABDDCAC"))
-    print(checkout("AAABB"))
-    print(checkout("ABCDCBAABCABBAAA"))
+    # print(checkout("B"))
+    # print(checkout("C"))
+    # print(checkout("D"))
+    # print(checkout("a"))
+    # print(checkout("-"))
+    # print(checkout("ABCa"))
+    # print(checkout("AxA"))
+    # print(checkout("ABCD"))
+    # print(checkout("A"))
+    # print(checkout("AA"))
+    # print(checkout("AAA"))
+    # print(checkout("AAAA"))
+    # print(checkout("AAAAA"))
+    # print(checkout("AAAAAA"))
+    # print(checkout("B"))
+    # print(checkout("BB"))
+    # print(checkout("BBB"))
+    # print(checkout("BBBB"))
+    # print(checkout("ABCDABCD"))
+    # print(checkout("BABDDCAC"))
+    # print(checkout("AAABB"))
+    # print(checkout("ABCDCBAABCABBAAA"))
+
 
 
 
