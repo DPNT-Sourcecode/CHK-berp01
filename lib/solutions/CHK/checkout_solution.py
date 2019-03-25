@@ -138,7 +138,7 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #print(checkout("") == 0)
     #print(checkout("A") == 50)
     '''print(checkout("B") == 30)
@@ -189,6 +189,7 @@ if __name__ == "__main__":
     # print(checkout("BABDDCAC"))
     # print(checkout("AAABB"))
     # print(checkout("ABCDCBAABCABBAAA"))
+
 
 
 
