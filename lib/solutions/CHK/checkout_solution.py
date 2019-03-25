@@ -77,8 +77,8 @@ def buy_x_get_x_free(basket):
 
                 # take free_item_count free_item_keys from basket.
                 if free_item_key in basket:
-                    basket[free_item_key] = min(
-                        0, basket[free_item_key]-free_item_count)
+                    basket[free_item_key] = max(
+                        0, (basket[free_item_key]-free_item_count))
 
     return basket, total
 
@@ -112,9 +112,11 @@ def checkout(skus):  # TO DO : Optimise
 
     #  more functional approach
     basket, total = buy_x_get_x_free(basket)
+    print(total, basket)
     basket, special_offer_total = process_special_offers(basket)
     total = total + special_offer_total
 
+    print(total, basket)
     sku_prices = get_sku_lookup()
     for item in basket.keys():
         total = total + (sku_prices[item] * basket[item])
@@ -138,8 +140,9 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-# if __name__ == "__main__":
-    # print(checkout("E"))  # 40
+if __name__ == "__main__":
+    print(checkout("EE"))  # 40
+    print(checkout("EEB"))  # 40
     # print(checkout("ABCDE"))  # 155
     # print(checkout("AAAAA"))  # 200
     # print(checkout("AAAAAA"))  # 260
@@ -185,6 +188,7 @@ def checkout(skus):  # TO DO : Optimise
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
 
