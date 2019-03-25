@@ -2,7 +2,7 @@
 
 def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
     ''' get a dict of all the {skus:prices}'''
-    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E':40}
+    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40}
     return sku_lookup
 
 
@@ -11,7 +11,7 @@ def get_basket(sku_string):
 
     # all the valid items, this would be some kind of database is valid sku lookup function
     #
-    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E':0}
+    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0}
     for item in sku_string:
         if item not in items_count.keys():
             return None  # not a valid sku, return
@@ -25,7 +25,7 @@ def get_special_offers():
     #
     # special_offers = {'A':{3: -20}, {'B':{2, -15}}} # for every  {x:{y:z}} for every y of x add z
     # special_offers = {'A':{3: 130}, {'B':{2, 45}}} // for every  {x:{y:z}} for every y of x add z
-    special_offers = {'A': {3:130, 5:200}, 'B': {2, 45}}
+    special_offers = {'A': {5: 200, 3: 130}, 'B': {2: 45}}
     return special_offers
 
 
@@ -36,13 +36,16 @@ def process_special_offers(basket):
     for item in basket.keys():
         if item in special_offers:
             item_count = basket[item]
-            required_count = special_offers[item][0]
-            special_offer_price = special_offers[item][1]
-            if item_count >= required_count:
-                # we have enough for as special offer
-                offer_count = int(basket[item] / required_count)
-                basket[item] = basket[item] - (required_count * offer_count)
-                total = total + (special_offer_price * offer_count)
+            for special_offer_item_count in special_offers[item]:
+                print(special_offer_item_count)
+                special_offer_price = special_offers[item][special_offer_item_count]
+                if item_count >= special_offer_item_count:
+                    # we have enough for as special offer
+                    offer_count = int(
+                        floor(basket[item] / special_offer_item_count))
+                    basket[item] = basket[item] - \
+                        (special_offer_item_count * offer_count)
+                    total = total + (special_offer_price * offer_count)
     return basket, total
 
 
@@ -113,12 +116,10 @@ def checkout(skus):  # TO DO : Optimise
     basket, special_offer_total = process_special_offers(basket)
     total = total + special_offer_total
 
-
     sku_prices = get_sku_lookup()
     for item in basket.keys():
         total = total + (sku_prices[item] * basket[item])
     return total
-    
 
     # special_offers = get_special_offers()
     # total = 0
@@ -137,12 +138,11 @@ def checkout(skus):  # TO DO : Optimise
     # return total
 
 
-
 # tests
 if __name__ == "__main__":
-	print( checkout("E")) # 40
-	print( checkout("ABCDE")) # 155
-	print( checkout("AAAAA")) # 200
+    print(checkout("E"))  # 40
+    print(checkout("ABCDE"))  # 155
+    print(checkout("AAAAA"))  # 200
     #print( checkout("AAAAA") )
     # print( checkout("") == 0)
     # print( checkout("A") == 50)
