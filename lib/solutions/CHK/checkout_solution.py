@@ -28,22 +28,26 @@ def buy_x_get_x_free(basket):
 	for key special_offers.keys():
 		if key in basket:
 			# we have a special offer item to process;
-			required_count = special_offers[key][0]
+			required_for_offer_count = special_offers[key][0]
 			basket_count = basket[key]
-			if required_count <= basket_count: # does it reach the requirement
+			
+			if required_for_offer_count <= basket_count: # does it reach the requirement
 			   # how many
-			   number_of_offers = required_count / basket_count;
+			   number_of_offers = required_for_offer_count / basket_count;
+			   
+			   # add the value of the purchases special offer items
 			   total = get_sku_lookup()[key] * number_of_offers;
 				
-				basket[key][0] = required_count - (basket_count*required_count) # save on a modulo.
-				
-				
+				basket[key] = basket_count - (number_of_offers*required_for_offer_count) # save on a modulo.
+
 				free_item_key = special_offers[key][1][0]
 				free_item_count = special_offers[key][1][1]
 				
 				# take free_item_count free_item_keys from basket. 
 				if free_item_key in basket:
-					basket[free_item_key] = min(basket[free_item_key], basket[free_item_key]-free_item_count)
+					basket[free_item_key] = min(0, basket[free_item_key]-free_item_count)
+
+	return basket, total
 
 def checkout(skus):  # TO DO : Optimise
     'supermarket checkout caluclator, returns cost of items skus'
@@ -134,4 +138,5 @@ if __name__ == "__main__":
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
 '''
+
 
