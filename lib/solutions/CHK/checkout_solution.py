@@ -61,6 +61,7 @@ def buy_x_get_x_free(basket):
             basket_count = basket[key]
 
             while required_for_offer_count <= basket_count :
+                print(basket)
                 #number_of_offers = int(basket_count/ required_for_offer_count)
 
                 # add the value of the purchases special offer items
@@ -73,17 +74,10 @@ def buy_x_get_x_free(basket):
                 basket[key] = basket_count
                 free_item_key = special_offers[key][1][0]
                 free_item_count = special_offers[key][1][1]
-                print('free_item_key', free_item_key)
-                print('free_item_count', free_item_count)
                 # take free_item_count free_item_keys from basket.
                 if free_item_key in basket:
-                    print(basket[free_item_key])
-                    basket[free_item_key] = max(
+                    basket_count = max(
                         0, ( basket[free_item_key]-free_item_count))
-                    print(basket[free_item_key])
-                else:
-                    print('oops')
-
                 basket[key] = basket_count
     return basket, total
 
@@ -116,6 +110,7 @@ def checkout(skus):  # TO DO : Optimise
         return -1
 
     #  more functional approach
+    print(basket)
     basket, total = buy_x_get_x_free(basket)
     print(basket, total)
     basket, special_offer_total = process_special_offers(basket)
@@ -145,7 +140,10 @@ def checkout(skus):  # TO DO : Optimise
 
 # tests
 if __name__ == "__main__":
-	print(checkout("FFF")) # = 20
+    #print(checkout("FFF")) # = 20
+    #print(checkout("FFFF")) # = 30
+    print(checkout("FFFFF")) # = 40
+    print(checkout("FFFFFF")) # = 40
     #print(checkout("EEEEBB"))# 160, got: 190
     #print(checkout("BEBEEE"))# 160, got: 190
     # print(checkout("EE"))  # 40
@@ -196,6 +194,7 @@ if __name__ == "__main__":
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
 
