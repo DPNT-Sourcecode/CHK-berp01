@@ -18,6 +18,32 @@ def get_special_offers():
 # noinspection PyUnusedLocal
 # skus = unicode string
 
+def buy_x_get_x_free(basket):
+	''' take care of by X of item Y get Z of W free
+		input arguement basket: dict of item:count
+		return modified dict, current basket total
+	'''
+	total = 0;
+	special_offers = {'E':[2, ['B', 1]]} # for every '2' 'E' get 1 'B'
+	for key special_offers.keys():
+		if key in basket:
+			# we have a special offer item to process;
+			required_count = special_offers[key][0]
+			basket_count = basket[key]
+			if required_count <= basket_count: # does it reach the requirement
+			   # how many
+			   number_of_offers = required_count / basket_count;
+			   total = get_sku_lookup()[key] * number_of_offers;
+				
+				basket[key][0] = required_count - (basket_count*required_count) # save on a modulo.
+				
+				
+				free_item_key = special_offers[key][1][0]
+				free_item_count = special_offers[key][1][1]
+				
+				# take free_item_count free_item_keys from basket. 
+				if free_item_key in basket:
+					basket[free_item_key] = min(basket[free_item_key], basket[free_item_key]-free_item_count)
 
 def checkout(skus):  # TO DO : Optimise
     'supermarket checkout caluclator, returns cost of items skus'
@@ -108,3 +134,4 @@ if __name__ == "__main__":
     print(checkout("AAABB"))
     print(checkout("ABCDCBAABCABBAAA"))
 '''
+
