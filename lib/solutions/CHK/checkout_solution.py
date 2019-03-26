@@ -76,9 +76,14 @@ def get_special_offers():
     # special_offers = {'A':{3: -20}, {'B':{2, -15}}} # for every  {x:{y:z}} for every y of x add z
     # special_offers = {'A':{3: 130}, {'B':{2, 45}}} // for every  {x:{y:z}} for every y of x add z
     special_offers = {
-        'A': {5: 200, 3: 130},
-        'B': {2: 45}},
-        'H': {10:80, 5: 45}
+        'A': {5:200, 3:130},
+        'B': {2:45}},
+        'H': {10:80, 5:45},
+        'K': {2:150},
+        'P': {5:200},
+        'Q': {3:80}
+        'V': {3:130, 2:90}
+        
     return special_offers
 
 
@@ -108,7 +113,14 @@ def buy_x_get_x_free(basket):
     '''
     total=0
     # for every '2' 'E' get 1 'B'
-    special_offers={'E': [2, ['B', 1]], 'F': [2, ['F', 1]]}
+    special_offers={
+        'E': [2, ['B', 1]],
+        'F': [2, ['F', 1]],
+        'N': [3, ['M', 1]],
+        'R': [3, ['Q', 1]],
+        'U': [3, ['U', 1]]
+        }
+
     for key in special_offers.keys():
         if key in basket:
             # we have a special offer item to process
@@ -170,8 +182,9 @@ def checkout(skus):  # TO DO : Optimise
         total=total + (sku_prices[item] * basket[item])
     return total
 
-
+print(checkout("NNNM"))#
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
 
