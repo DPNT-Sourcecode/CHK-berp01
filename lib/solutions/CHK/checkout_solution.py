@@ -36,6 +36,9 @@ def get_basket(sku_string):
         items_count[item] = items_count[item] + 1
     return items_count
 
+def group_discounts_and_price()
+    discount_price = 45
+    return "STXYZ", discount_price
 
 def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
     ''' get a dict of all the {skus:prices}'''
@@ -50,7 +53,7 @@ def get_sku_lookup():  # normally would have to query a database or something, w
         'H': 10,
         'I': 35,
         'J': 60,
-        'K': 80,
+        'K': 70,
         'L': 90,
         'M': 15,
         'N': 40,
@@ -58,14 +61,14 @@ def get_sku_lookup():  # normally would have to query a database or something, w
         'P': 50,
         'Q': 30,
         'R': 50,
-        'S': 30,
+        'S': 20,
         'T': 20,
         'U': 40,
         'V': 50,
         'W': 20,
-        'X': 90,
-        'Y': 10,
-        'Z': 50}
+        'X': 17,
+        'Y': 20,
+        'Z': 21}
     return sku_lookup
 
 
@@ -190,6 +193,7 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
 
 
 
