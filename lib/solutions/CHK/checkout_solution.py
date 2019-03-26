@@ -58,7 +58,7 @@ def buy_x_get_x_free(basket):
         2, ['F', 1]]}  # for every '2' 'E' get 1 'B'
     for key in special_offers.keys():
         if key in basket:
-            # we have a special offer item to process;
+            # we have a special offer item to process
             required_for_offer_count = special_offers[key][0]
             basket_count = basket[key]
 
@@ -120,11 +120,4 @@ def checkout(skus):  # TO DO : Optimise
     return total
 
 
-if __name__ == "__main__":
-    # print(checkout("EEB"))# == 80
-    # print(checkout("EEEB"))# == 120
-    # print(checkout("EEEEBB"))# == 160
-    # print(checkout("CDFFAECBDEAB"));
-    exit()
-    # print(checkout("CDFFAECBDEAB"));
 
