@@ -118,3 +118,13 @@ def checkout(skus):  # TO DO : Optimise
     for item in basket.keys():
         total = total + (sku_prices[item] * basket[item])
     return total
+
+
+if __name__ == "__main__":
+    # print(checkout("EEB"))# == 80
+    # print(checkout("EEEB"))# == 120
+    # print(checkout("EEEEBB"))# == 160
+    # print(checkout("CDFFAECBDEAB"));
+    exit()
+    # print(checkout("CDFFAECBDEAB"));
+
