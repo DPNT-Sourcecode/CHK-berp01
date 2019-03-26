@@ -136,7 +136,10 @@ def checkout(skus):  # TO DO : Optimise
 
 
 # tests
-#if __name__ == "__main__":
+# if __name__ == "__main__":
+    # print(checkout("EEB"))# == 80
+    # print(checkout("EEEB"))# == 120
+    # print(checkout("EEEEBB"))# == 160
     #print(checkout("CDFFAECBDEAB"));
 
     # CDFFAECBDEAB -> 0 # - 2f & fb
@@ -218,3 +221,4 @@ def checkout(skus):  # TO DO : Optimise
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
