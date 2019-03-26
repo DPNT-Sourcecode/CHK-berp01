@@ -165,7 +165,7 @@ def process_group_discounts(basket):
     count = 0
     for item in group:
         count += basket[item]
-
+    
     if count >= required_count_from_group:
         # apply count offers
         # make sure to factor in price?
@@ -215,5 +215,3 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
-
-
