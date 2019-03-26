@@ -75,10 +75,9 @@ def buy_x_get_x_free(basket):
                 free_item_count = special_offers[key][1][1]
                 # take free_item_count free_item_keys from basket.
                 if free_item_key in basket:
-                    basket_count = max(
-                        0, ( basket[free_item_key]-free_item_count))
-                basket[key] = basket_count
-                print("\t", basket, key)
+                    basket[free_item_key]= max(
+                        0, ( basket[free_item_key]-required_for_offer_count))
+
     return basket, total
 
 
@@ -224,6 +223,7 @@ if __name__ == "__main__":
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
 
