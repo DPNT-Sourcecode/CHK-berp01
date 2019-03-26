@@ -167,25 +167,29 @@ def process_group_discounts(basket):
         count += basket[item]
     ('count', count)
     # how many offers does that make
+    
     set_count = int(count / 3)
+    need_to_remove = set_count * required_count_from_group
     total = 0
-    print('count', set_count)
+    print('set_count', set_count)
+    print('need_to_remove', need_to_remove)
     while set_count > 0:
         # apply count offers
         # make sure to factor in price?
-        need_to_remove =  required_count_from_group
         for item in group:
-
+            # remove the elements from the set
             while need_to_remove > 0 and basket[item] > 0:
                 # keep removing an instance of item element from the set until we have reduced
                 # count to zero or the number of those items to 0
-                set_count = set_count - 1
+                print('removing ', item)
+                need_to_remove = need_to_remove - 1
                 basket[item] = basket[item] - 1
                 total += 45
                 print(basket, total)
-            if count == 0:
+            set_count = set_count-1;
+            if set_count == 0:
                 break
-            
+
     return basket, total
 
 
@@ -242,6 +246,7 @@ print(checkout("SSS"))  # 45
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
 
 
 
