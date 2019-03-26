@@ -92,9 +92,11 @@ def group_discounts_and_price()
     # they have 4 elements from the group?
     # z is most expensive, so normally it would be cheapest
     # free, always favouring the customer would mean 
-    # giving them a bigger discout
+    # giving them a bigger discount
     discount_price = 45
-    return (3, "STXYZ", discount_price)
+    #return (3, "STXYZ", discount_price)
+    return 3, "ZSTYX", discount_price # reodered group for best value
+    
 
 def process_special_offers(basket):
     ''' process the special offers based on prices, should be performed after buy_x_get_x_free'''
@@ -154,6 +156,7 @@ def buy_x_get_x_free(basket):
     return basket, total
 
 def process_group_discounts(basket):
+    required_count_from_group, group, group_price = group_discounts_and_price();
     
 def get_total_for_elements_in_basket(basket):
 
@@ -199,3 +202,4 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
