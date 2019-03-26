@@ -83,20 +83,21 @@ def get_special_offers():
         'P': {5: 200},
         'Q': {3: 80},
         'V': {3: 130, 2: 90}
-        }
+    }
 
     return special_offers
 
-def group_discounts_and_price()
-    # do we factor in which should be included if 
+
+def group_discounts_and_price():
+    # do we factor in which should be included if
     # they have 4 elements from the group?
     # z is most expensive, so normally it would be cheapest
-    # free, always favouring the customer would mean 
+    # free, always favouring the customer would mean
     # giving them a bigger discount
     discount_price = 45
-    #return (3, "STXYZ", discount_price)
-    return 3, "ZSTYX", discount_price # reodered group for best value
-    
+    # return (3, "STXYZ", discount_price)
+    return 3, "ZSTYX", discount_price  # reodered group for best value
+
 
 def process_special_offers(basket):
     ''' process the special offers based on prices, should be performed after buy_x_get_x_free'''
@@ -111,8 +112,9 @@ def process_special_offers(basket):
                     # we have enough for as special offer
                     offer_count = int(
                         basket[item] / special_offer_item_count)
-                    basket[item]=basket[item] - (special_offer_item_count * offer_count)
-                    total=total + (special_offer_price * offer_count)
+                    basket[item] = basket[item] - \
+                        (special_offer_item_count * offer_count)
+                    total = total + (special_offer_price * offer_count)
     return basket, total
 
 
@@ -121,15 +123,15 @@ def buy_x_get_x_free(basket):
                     input arguement basket: dict of item:count
                     return modified dict, current basket total
     '''
-    total=0
+    total = 0
     # for every '2' 'E' get 1 'B'
-    special_offers={
+    special_offers = {
         'E': [2, ['B', 1]],
         'F': [2, ['F', 1]],
         'N': [3, ['M', 1]],
         'R': [3, ['Q', 1]],
         'U': [3, ['U', 1]]
-        }
+    }
 
     for key in special_offers.keys():
         if key in basket:
@@ -140,33 +142,44 @@ def buy_x_get_x_free(basket):
                 # number_of_offers = int(basket_count/ required_for_offer_count)
                 # add the value of the purchases special offer items
                 total = total + (get_sku_lookup()
-                               [key] * (required_for_offer_count))
+                                 [key] * (required_for_offer_count))
 
-                free_item_key=special_offers[key][1][0]
-                free_item_count=special_offers[key][1][1]
+                free_item_key = special_offers[key][1][0]
+                free_item_count = special_offers[key][1][1]
 
                 # decrement basket based on offer
-                basket[key]=basket[key] - required_for_offer_count
+                basket[key] = basket[key] - required_for_offer_count
 
                 # take free_item_count free_item_keys from basket.
                 if free_item_key in basket:
-                    basket[free_item_key]=max(
+                    basket[free_item_key] = max(
                         0, (basket[free_item_key]-free_item_count))
 
     return basket, total
 
+
 def process_group_discounts(basket):
-    required_count_from_group, group, group_price = group_discounts_and_price();
-    
+    # assuming basket is valid, and has every element in the group
+    required_count_from_group, group, group_price = group_discounts_and_price()
+
+    count = 0
+    for item in group:
+        count += basket[item]
+
+    if count >= required_count_from_group:
+        # apply count offers
+        # make sure to factor in price?
+        return;
+
 def get_total_for_elements_in_basket(basket):
 
     # should be able to use an accumulate style algorithm for this.
-    total=0
-    prices=get_sku_lookup()
+    total = 0
+    prices = get_sku_lookup()
     for sku in basket.keys():
-        item_count=basket[sku]
+        item_count = basket[sku]
         if sku in prices.keys():
-            total=total + (item_count * prices[key])
+            total = total + (item_count * prices[key])
             basket.pop(sku)
     return total, basket  # basket should be empty
 
@@ -179,19 +192,19 @@ def checkout(skus):  # TO DO : Optimise
     if len(skus) == 0:
         return 0
 
-    basket=get_basket(skus)
+    basket = get_basket(skus)
     if basket == None:
         # invalid sku in skus
         return -1
 
     #  more functional approach
-    basket, total=buy_x_get_x_free(basket)
+    basket, total = buy_x_get_x_free(basket)
     # print(basket, total)
-    basket, special_offer_total=process_special_offers(basket)
-    total=total + special_offer_total
-    sku_prices=get_sku_lookup()
+    basket, special_offer_total = process_special_offers(basket)
+    total = total + special_offer_total
+    sku_prices = get_sku_lookup()
     for item in basket.keys():
-        total=total + (sku_prices[item] * basket[item])
+        total = total + (sku_prices[item] * basket[item])
     return total
 
 # print(checkout("NNNM"))# 120
@@ -202,4 +215,5 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
 
