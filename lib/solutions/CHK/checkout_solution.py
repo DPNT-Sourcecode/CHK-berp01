@@ -5,7 +5,7 @@ def get_basket(sku_string):
 
     # all the valid items, this would be some kind of database is valid sku lookup function
     #
-    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F':0}
+    items_count = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'E': 0, 'F': 0}
     for item in sku_string:
         if item not in items_count.keys():
             return None  # not a valid sku, return
@@ -15,8 +15,9 @@ def get_basket(sku_string):
 
 def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
     ''' get a dict of all the {skus:prices}'''
-    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F':10}
+    sku_lookup = {'A': 50, 'B': 30, 'C': 20, 'D': 15, 'E': 40, 'F': 10}
     return sku_lookup
+
 
 def get_special_offers():
 
@@ -41,7 +42,7 @@ def process_special_offers(basket):
                     # we have enough for as special offer
                     offer_count = int(
                         basket[item] / special_offer_item_count)
-                    basket[item] =  basket[item] - \
+                    basket[item] = basket[item] - \
                         (special_offer_item_count * offer_count)
                     total = total + (special_offer_price * offer_count)
     return basket, total
@@ -53,14 +54,15 @@ def buy_x_get_x_free(basket):
                     return modified dict, current basket total
     '''
     total = 0
-    special_offers = {'E': [2, ['B', 1]], 'F':[2,['F',1]]}  # for every '2' 'E' get 1 'B'
+    special_offers = {'E': [2, ['B', 1]], 'F': [
+        2, ['F', 1]]}  # for every '2' 'E' get 1 'B'
     for key in special_offers.keys():
         if key in basket:
             # we have a special offer item to process;
             required_for_offer_count = special_offers[key][0]
             basket_count = basket[key]
 
-            while required_for_offer_count <= basket_count :
+            while required_for_offer_count <= basket_count:
                 #number_of_offers = int(basket_count/ required_for_offer_count)
 
                 # add the value of the purchases special offer items
@@ -69,14 +71,14 @@ def buy_x_get_x_free(basket):
 
                 # save on a modulo.
                 basket_count = basket_count - required_for_offer_count
-                
+
                 basket[key] = basket_count
                 free_item_key = special_offers[key][1][0]
                 free_item_count = special_offers[key][1][1]
                 # take free_item_count free_item_keys from basket.
                 if free_item_key in basket:
-                    basket[free_item_key]= max(
-                        0, ( basket[free_item_key]-free_item_count))
+                    basket[free_item_key] = max(
+                        0, (basket[free_item_key]-free_item_count))
 
     return basket, total
 
@@ -140,7 +142,7 @@ def checkout(skus):  # TO DO : Optimise
     # print(checkout("EEB"))# == 80
     # print(checkout("EEEB"))# == 120
     # print(checkout("EEEEBB"))# == 160
-    #print(checkout("CDFFAECBDEAB"));
+    # print(checkout("CDFFAECBDEAB"));
 
     # CDFFAECBDEAB -> 0 # - 2f & fb
     # CDAECBDEAB ->  20 # - 2e & 1b
@@ -149,10 +151,10 @@ def checkout(skus):  # TO DO : Optimise
     # CDCD -> 200 + 30 # - 2C
     # DD -> 230 + 40 - 2D
     #  -> 270 + 30 # 300
-    
+
     # CDFFAECBDEAB -> 0 # special offers total + 2f, 2e  : - 1b
     # CDACBDA -> 100
-    # CDACBDA # process special prices 
+    # CDACBDA # process special prices
     # no change
     # CDACBDA - 2A + 100
     # CDCBD - 1 B + 30
@@ -165,14 +167,13 @@ def checkout(skus):  # TO DO : Optimise
     # CDCD -> 200 + 30 # - 2C
     # DD -> 230 + 40 - 2D
     #  -> 270 + 30 # 300
-    
-    
-    #print(checkout("FFF")) # = 20
-    #print(checkout("FFFF")) # = 30
-    #print(checkout("FFFFF")) # = 40
-    #print(checkout("FFFFFF")) # = 40
-    #print(checkout("EEEEBB"))# 160, got: 190
-    #print(checkout("BEBEEE"))# 160, got: 190
+
+    # print(checkout("FFF")) # = 20
+    # print(checkout("FFFF")) # = 30
+    # print(checkout("FFFFF")) # = 40
+    # print(checkout("FFFFFF")) # = 40
+    # print(checkout("EEEEBB"))# 160, got: 190
+    # print(checkout("BEBEEE"))# 160, got: 190
     # print(checkout("EE"))  # 40
     # print(checkout("EEB")) # expected: 80, got: 40
     # print(checkout("ABCDEABCDE"))  # expected: 280, got: 210
@@ -221,4 +222,5 @@ def checkout(skus):  # TO DO : Optimise
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
