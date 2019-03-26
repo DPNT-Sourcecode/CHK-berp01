@@ -76,8 +76,7 @@ def buy_x_get_x_free(basket):
                 free_item_count = special_offers[key][1][1]
                 # take free_item_count free_item_keys from basket.
                 if free_item_key in basket:
-                    basket[free_item_key] = max(
-                        0, (basket[free_item_key]-free_item_count))
+                    basket[free_item_key] = max(0, (basket[free_item_key]-free_item_count))
 
     return basket, total
 
@@ -118,6 +117,7 @@ def checkout(skus):  # TO DO : Optimise
         total = total + (sku_prices[item] * basket[item])
     return total
  
+
 
 
 
