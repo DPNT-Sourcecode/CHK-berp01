@@ -96,7 +96,6 @@ def checkout(skus):  # TO DO : Optimise
     'supermarket checkout caluclator, returns cost of items skus'
     # illegal input return -1
     # caluclate the value of item factoring in special offers.
-
     # we actually want to keep a count of the different items
     if len(skus) == 0:
         return 0
@@ -114,3 +113,4 @@ def checkout(skus):  # TO DO : Optimise
     for item in basket.keys():
         total = total + (sku_prices[item] * basket[item])
     return total
+
