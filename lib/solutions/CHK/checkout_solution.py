@@ -118,8 +118,3 @@ def checkout(skus):  # TO DO : Optimise
     return total
 
 #print(checkout("EEB"))# == 80
-
-
-
-
-
