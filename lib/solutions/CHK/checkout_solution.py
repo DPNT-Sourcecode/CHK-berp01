@@ -54,8 +54,7 @@ def buy_x_get_x_free(basket):
                     return modified dict, current basket total
     '''
     total = 0
-    special_offers = {'E': [2, ['B', 1]], 'F': [
-        2, ['F', 1]]}  # for every '2' 'E' get 1 'B'
+    special_offers = {'E': [2, ['B', 1]], 'F': [2, ['F', 1]]}  # for every '2' 'E' get 1 'B'
     for key in special_offers.keys():
         if key in basket:
             # we have a special offer item to process
@@ -119,6 +118,7 @@ def checkout(skus):  # TO DO : Optimise
         total = total + (sku_prices[item] * basket[item])
     return total
  
+
 
 
 
