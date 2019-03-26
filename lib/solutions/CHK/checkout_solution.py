@@ -110,8 +110,10 @@ def checkout(skus):  # TO DO : Optimise
 
     #  more functional approach
     basket, total = buy_x_get_x_free(basket)
+    print(basket, total)
     basket, special_offer_total = process_special_offers(basket)
     total = total + special_offer_total
+    print(basket, total)
 
     sku_prices = get_sku_lookup()
     for item in basket.keys():
@@ -137,7 +139,23 @@ def checkout(skus):  # TO DO : Optimise
 
 # tests
 if __name__ == "__main__":
-	print(checkout("CDFFAECBDEAB"));
+    print(checkout("CDFFAECBDEAB"));
+    # "CDFFAECBDEAB" // 2 f 1 b free
+    # "CDAECDEAB" -> 20 // 
+    # "CDAECDEAB" -> 80+20 #100 // 2e get one b free 2e = 80
+    # "CDACDA" ->80+100 180
+    # "CDCD" -> 100 + 180 # 280
+    # "DD" -> 40 + 280 # 320
+    # "" -> 30 + 320
+    
+    # CDFFAECBDEAB -> 0 # - 2f & 1b
+    # CDAECDEAB -> 20 # - 2e & 1b
+    # CDACDA -> 20 + 80 # -2 A
+    # CDCD -> 100 + 100 # - 2C
+    # DD -> 200 + 40 - 2D
+    #  -> 240 + 30
+    
+    
     #print(checkout("FFF")) # = 20
     #print(checkout("FFFF")) # = 30
     #print(checkout("FFFFF")) # = 40
@@ -192,4 +210,5 @@ if __name__ == "__main__":
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
