@@ -167,23 +167,25 @@ def process_group_discounts(basket):
         count += basket[item]
     print('count', count)
     # how many offers does that make
-    count = int(count /3)
+    count = int(count / 3)
     total = 0
     while count > 0:
         # apply count offers
         # make sure to factor in price?
-        
+
         for item in group:
-            while count > 0 && basket[item]:
-                #keep removing an instance of item element from the set until we have reduced 
+            while count > 0 and basket[item]:
+                # keep removing an instance of item element from the set until we have reduced
                 # count to zero or the number of those items to 0
-                count = count -1
-                basket[item] = basket[item] -1
-                total +=45
+                count = count - 1
+                basket[item] = basket[item] - 1
+                total += 45
+                print(basket, total)
             if count == 0:
                 break
-    print(basket, total)
+            
     return basket, total
+
 
 def get_total_for_elements_in_basket(basket):
 
@@ -211,11 +213,11 @@ def checkout(skus):  # TO DO : Optimise
         # invalid sku in skus
         return -1
 
-    basket, group_discount_total =  process_group_discounts(basket)
-    total = total + group_discount_total
+    basket, total = process_group_discounts(basket)
     print(basket, total)
     #  more functional approach
-    basket, total = buy_x_get_x_free(basket)
+    basket, bxgxf_total  = buy_x_get_x_free(basket)
+    total = total + bxgxf_total;
     # print(basket, total)
     basket, special_offer_total = process_special_offers(basket)
     total = total + special_offer_total
@@ -224,7 +226,10 @@ def checkout(skus):  # TO DO : Optimise
         total = total + (sku_prices[item] * basket[item])
     return total
 
-print(checkout("NNNM"))# 120
+
+print(checkout("SSS"))  # 45
+#print(checkout("SSSZ"))  # 45 + 20
+#print(checkout("XSSZ"))  # 45 + 17
 
 # print(checkout("NNNM"))# 120
 # print(checkout("NNNMM"))# 135
@@ -234,5 +239,6 @@ print(checkout("NNNM"))# 120
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
 
 
