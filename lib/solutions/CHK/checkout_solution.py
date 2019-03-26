@@ -36,9 +36,6 @@ def get_basket(sku_string):
         items_count[item] = items_count[item] + 1
     return items_count
 
-def group_discounts_and_price()
-    discount_price = 45
-    return "STXYZ", discount_price
 
 def get_sku_lookup():  # normally would have to query a database or something, will cheat and return a dict
     ''' get a dict of all the {skus:prices}'''
@@ -90,6 +87,14 @@ def get_special_offers():
 
     return special_offers
 
+def group_discounts_and_price()
+    # do we factor in which should be included if 
+    # they have 4 elements from the group?
+    # z is most expensive, so normally it would be cheapest
+    # free, always favouring the customer would mean 
+    # giving them a bigger discout
+    discount_price = 45
+    return (3, "STXYZ", discount_price)
 
 def process_special_offers(basket):
     ''' process the special offers based on prices, should be performed after buy_x_get_x_free'''
@@ -148,7 +153,8 @@ def buy_x_get_x_free(basket):
 
     return basket, total
 
-
+def process_group_discounts(basket):
+    
 def get_total_for_elements_in_basket(basket):
 
     # should be able to use an accumulate style algorithm for this.
@@ -193,7 +199,3 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
-
-
-
-
