@@ -150,6 +150,22 @@ if __name__ == "__main__":
     # DD -> 230 + 40 - 2D
     #  -> 270 + 30 # 300
     
+    # CDFFAECBDEAB -> 0 # special offers total + 2f, 2e  : - 1b
+    # CDACBDA -> 100
+    # CDACBDA # process special prices 
+    # no change
+    # CDACBDA - 2A + 100
+    # CDCBD - 1 B + 30
+    # CDCD - 2C + 40
+    # DD - 2D + 30
+    # 200 + 100 = 300
+    # CDAECBDEAB ->  20 # - 2e & 1b
+    # CDACDAB -> 20 + 80 # -2 A
+    # CDCDB -> 100 + 100 # -1 b
+    # CDCD -> 200 + 30 # - 2C
+    # DD -> 230 + 40 - 2D
+    #  -> 270 + 30 # 300
+    
     
     #print(checkout("FFF")) # = 20
     #print(checkout("FFFF")) # = 30
@@ -205,6 +221,7 @@ if __name__ == "__main__":
     # print( checkout("CCADDEEBBA") == -1)
     # print( checkout("AAAAAEEBAAABB") == -1)
     # print( checkout("ABCDECBAABCABBAAAEEAA") == -1)
+
 
 
 
