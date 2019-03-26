@@ -1,5 +1,3 @@
-
-
 def get_basket(sku_string):
     ''' convert a string of SKU_values to a dict item:count '''
 
