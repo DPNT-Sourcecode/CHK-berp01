@@ -79,7 +79,7 @@ def get_special_offers():
         'A': {5: 200, 3: 130},
         'B': {2: 45},
         'H': {10: 80, 5: 45},
-        'K': {2: 150},
+        'K': {2: 120},
         'P': {5: 200},
         'Q': {3: 80},
         'V': {3: 130, 2: 90}
@@ -226,6 +226,9 @@ def checkout(skus):  # TO DO : Optimise
         total = total + (sku_prices[item] * basket[item])
     return total
 
+# print(checkout("KK")) # 120
+# print(checkout("KKK")) # 190
+# print(checkout("KKKK")) # 240
 
 # print(checkout("SSS"))  # 45
 # print(checkout("SSSZ"))  # 45 + 20 65
@@ -239,6 +242,7 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
 
 
 
