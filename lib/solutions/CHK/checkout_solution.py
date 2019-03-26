@@ -58,17 +58,12 @@ def buy_x_get_x_free(basket):
             # we have a special offer item to process
             required_for_offer_count = special_offers[key][0]
             basket_count = basket[key]
-
             while required_for_offer_count <= basket_count:
                 #number_of_offers = int(basket_count/ required_for_offer_count)
-
                 # add the value of the purchases special offer items
-                total = total + get_sku_lookup()[
-                    key] * (required_for_offer_count)
-
+                total = total + get_sku_lookup()[key] * (required_for_offer_count)
                 # save on a modulo.
                 basket_count = basket_count - required_for_offer_count
-
                 basket[key] = basket_count
                 free_item_key = special_offers[key][1][0]
                 free_item_count = special_offers[key][1][1]
@@ -113,4 +108,5 @@ def checkout(skus):  # TO DO : Optimise
     for item in basket.keys():
         total = total + (sku_prices[item] * basket[item])
     return total
+
 
