@@ -168,17 +168,22 @@ def process_group_discounts(basket):
     print('count', count)
     # how many offers does that make
     count = int(count /3)
+    total = 0
     while count > 0:
-        for item in group:
-            while count > 0 && basket[item]:
-                count = count -1
-                basket[item] = basket[item] -1
-
-    if count >= required_count_from_group:
         # apply count offers
         # make sure to factor in price?
-        keep removing an element from the set until we have enough
-        return;
+        
+        for item in group:
+            while count > 0 && basket[item]:
+                #keep removing an instance of item element from the set until we have reduced 
+                # count to zero or the number of those items to 0
+                count = count -1
+                basket[item] = basket[item] -1
+                total +=45
+            if count == 0:
+                break
+    print(basket, total)
+    return basket, total
 
 def get_total_for_elements_in_basket(basket):
 
@@ -206,6 +211,9 @@ def checkout(skus):  # TO DO : Optimise
         # invalid sku in skus
         return -1
 
+    basket, group_discount_total =  process_group_discounts(basket)
+    total = total + group_discount_total
+    print(basket, total)
     #  more functional approach
     basket, total = buy_x_get_x_free(basket)
     # print(basket, total)
@@ -216,6 +224,8 @@ def checkout(skus):  # TO DO : Optimise
         total = total + (sku_prices[item] * basket[item])
     return total
 
+print(checkout("NNNM"))# 120
+
 # print(checkout("NNNM"))# 120
 # print(checkout("NNNMM"))# 135
 # print(checkout("RRR"))# 150
@@ -224,4 +234,5 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
 
