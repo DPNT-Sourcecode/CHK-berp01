@@ -165,10 +165,19 @@ def process_group_discounts(basket):
     count = 0
     for item in group:
         count += basket[item]
-    
+    print('count', count)
+    # how many offers does that make
+    count = int(count /3)
+    while count > 0:
+        for item in group:
+            while count > 0 && basket[item]:
+                count = count -1
+                basket[item] = basket[item] -1
+
     if count >= required_count_from_group:
         # apply count offers
         # make sure to factor in price?
+        keep removing an element from the set until we have enough
         return;
 
 def get_total_for_elements_in_basket(basket):
@@ -215,3 +224,4 @@ def checkout(skus):  # TO DO : Optimise
 # print(checkout("FFFF")) # 30 # FFFF 0 F 20 '' 30
 # print(checkout("FFFFFF")) # 40
 # print(checkout("FFFFFF")) # 40
+
